@@ -21,7 +21,7 @@ MODEL_DICT = {}
 class VideoClassificationModel(pl.LightningModule):
     def __init__(
         self,
-        model_name: str = "resnet50-3d",
+        model_name: str = "r3d-18",
         optimizer: str = "sgd",
         lr: float = 1e-2,
         betas: tuple[float, float] = (0.9, 0.999),
@@ -162,10 +162,6 @@ class VideoClassificationModel(pl.LightningModule):
 
     def shared_step(self, batch, mode="train"):
         x, y = batch["video"], batch["label"]
-
-        print(x.size())
-        print(y.size())
-        exit()
 
         if mode == "train":
             # Only converts targets to one-hot if no label smoothing, mixup or cutmix is set
